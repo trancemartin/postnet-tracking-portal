@@ -1,0 +1,16 @@
+{
+  "name": "tracking-website",
+  "version": "1.0.0",
+  "description": "A web-based tracking application",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "keywords": ["tracking", "web", "analytics"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
