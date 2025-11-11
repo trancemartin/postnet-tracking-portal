@@ -227,7 +227,7 @@
       font-size: 18px;
     }
 
-    /* Mobile Responsive Styles - Scale Down Only */
+    /* Mobile Responsive Styles */
     @media (max-width: 768px) {
       body {
         font-size: 14px;
@@ -296,64 +296,53 @@
     <div class="top-bar-content">
       <div class="call-us">Call Us Now: 0860 767 8638</div>
       <div class="social-icons">
-        <a href="#">📘</a>
-        <a href="#">📷</a>
-        <a href="#">🐦</a>
+        <a href="#">FB</a>
+        <a href="#">TW</a>
+        <a href="#">IG</a>
       </div>
     </div>
   </div>
 
-  <!-- Main Header -->
-  <div class="main-header">
+  <!-- Header -->
+  <header class="main-header">
     <div class="header-content">
-      <div class="logo"><span>Post</span>N<span>et</span></div>
+      <div class="logo"><span>Post</span>Net</div>
       <div class="auth-buttons">
-        <a href="admin.html">Login</a>
+        <a href="#">Login</a>
         <a href="#">Register</a>
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- Navigation -->
-  <div class="nav-bar">
+  <nav class="nav-bar">
     <div class="nav-content">
       <a href="#">Home</a>
-      <a href="#">About Us</a>
       <a href="#">Services</a>
-      <a href="#">Store Locator</a>
-      <a href="#">Own A PostNet</a>
-      <a href="#">Contact Us</a>
-      <a href="#">Shipment Tracker</a>
-      <a href="#">Online Shop</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="/admin.html">Admin Panel</a>
     </div>
-  </div>
+  </nav>
 
   <!-- Hero Section -->
-  <div class="hero-section">
+  <section class="hero-section">
     <div class="hero-content">
-      <h1>Postnet Shipment Tracker</h1>
-      <p>Track your PostNet shipment on every leg of its journey.</p>
-      <a href="#tracking" class="contact-btn">Contact Us</a>
+      <h1>Track Your Shipment</h1>
+      <p>Enter your tracking number to get the latest status of your shipment.</p>
+      <a href="#" class="contact-btn">Contact Us</a>
     </div>
-  </div>
+  </section>
 
   <!-- Tracking Section -->
-  <div class="tracking-section" id="tracking">
+  <div class="tracking-section">
     <div class="tracking-content">
-      <h2>Track Your Postnet Shipment Now</h2>
-      <p class="instructions">
-        Please enter your PN or PP tracking number into the text box and click submit to track your shipment. Do not include any spaces.
-      </p>
-      <form id="trackingForm" class="tracking-form">
-        <input 
-          type="text" 
-          id="eventName" 
-          class="tracking-input"
-          placeholder="Tracking Number" 
-          required
-        >
+      <h2>Track & Trace</h2>
+      <p class="instructions">Enter your tracking number below to track your parcel's progress.</p>
+      <form id="tracking-form" class="tracking-form">
+        <input type="text" id="tracking-number" class="tracking-input" placeholder="Enter Tracking Number (e.g., PN123456789)" required>
         <button type="submit" class="track-btn">
-          Track Shipment <span class="search-icon">🔍</span>
+          <span class="search-icon">&#128269;</span> Track
         </button>
       </form>
     </div>
