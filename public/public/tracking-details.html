@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -252,6 +252,71 @@
     h3 {
       color: #E30613;
       font-weight: bold;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+
+      .shipment-card {
+        padding: 20px 15px;
+      }
+
+      .badge {
+        font-size: 11px;
+        padding: 6px 12px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .route-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+      }
+
+      .route-arrow {
+        transform: rotate(90deg);
+        font-size: 24px;
+      }
+
+      .timeline {
+        padding-left: 15px;
+      }
+
+      .timeline-item {
+        padding-left: 35px;
+      }
+
+      .timeline-dot {
+        width: 14px;
+        height: 14px;
+        left: -7px;
+      }
+
+      .back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      h2, h3 {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
