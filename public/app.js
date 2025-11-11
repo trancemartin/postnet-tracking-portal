@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Setup event listeners
 function setupEventListeners() {
   const trackingForm = document.getElementById('trackingForm');
-  trackingForm.addEventListener('submit', handleTrackEvent);
+  if (trackingForm) {
+    trackingForm.addEventListener('submit', handleTrackEvent);
+  }
 }
 
 // Load initial data
@@ -56,8 +58,8 @@ async function handleTrackEvent(e) {
       return;
     }
     
-    // Tracking number is valid, open details page
-    window.open(`tracking-details.html?tracking=${encodeURIComponent(trackingNumber)}`, '_blank');
+    // Tracking number is valid, navigate to details page
+    window.location.href = `tracking-details.html?tracking=${encodeURIComponent(trackingNumber)}`;
     
     // Log the tracking event
     await fetch('/api/track', {
@@ -71,9 +73,6 @@ async function handleTrackEvent(e) {
         timestamp: new Date().toISOString()
       })
     });
-    
-    // Clear the form
-    e.target.reset();
     
   } catch (error) {
     console.error('Failed to validate tracking number:', error);
