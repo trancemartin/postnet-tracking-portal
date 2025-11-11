@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostNet Shipment Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: #1a1a1a;
+      color: white;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+
+    .top-bar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .call-us {
+      color: #E30613;
+      font-weight: bold;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    /* Header */
+    .main-header {
+      background: #E30613;
+      padding: 20px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 36px;
+      font-weight: bold;
+      color: white;
+      font-style: italic;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      text-transform: uppercase;
+    }
+
+    .auth-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .auth-buttons a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      background: #FF6B7A;
+      padding: 15px 0;
+    }
+
+    .nav-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .nav-content a {
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(rgba(227, 6, 19, 0.9), rgba(227, 6, 19, 0.9)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23c00" width="1200" height="600"/></svg>');
+      background-size: cover;
+      background-position: center;
+      padding: 100px 20px;
+      text-align: left;
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-section h1 {
+      color: white;
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .hero-section p {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
+    .contact-btn {
+      background: #E30613;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .contact-btn:hover {
+      background: #c00510;
+    }
+
+    /* Tracking Section */
+    .tracking-section {
+      background: white;
+      padding: 60px 20px;
+    }
+
+    .tracking-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .tracking-section h2 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .tracking-section .instructions {
+      color: #666;
+      font-size: 16px;
+      margin-bottom: 40px;
+      line-height: 1.6;
+    }
+
+    .tracking-form {
+      display: flex;
+      gap: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .tracking-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .tracking-input::placeholder {
+      color: #999;
+    }
+
+    .track-btn {
+      background: #007bff;
+      color: white;
+      padding: 15px 40px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .track-btn:hover {
+      background: #0056b3;
+    }
+
+    .search-icon {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-content">
+      <div class="call-us">Call Us Now: 0860 767 8638</div>
+      <div class="social-icons">
+        <a href="#">📘</a>
+        <a href="#">📷</a>
+        <a href="#">🐦</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <div class="main-header">
+    <div class="header-content">
+      <div class="logo"><span>Post</span>N<span>et</span></div>
+      <div class="auth-buttons">
+        <a href="admin.html">Login</a>
+        <a href="#">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-bar">
+    <div class="nav-content">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Services</a>
+      <a href="#">Store Locator</a>
+      <a href="#">Own A PostNet</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Shipment Tracker</a>
+      <a href="#">Online Shop</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Postnet Shipment Tracker</h1>
+      <p>Track your PostNet shipment on every leg of its journey.</p>
+      <a href="#tracking" class="contact-btn">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Tracking Section -->
+  <div class="tracking-section" id="tracking">
+    <div class="tracking-content">
+      <h2>Track Your Postnet Shipment Now</h2>
+      <p class="instructions">
+        Please enter your PN or PP tracking number into the text box and click submit to track your shipment. Do not include any spaces.
+      </p>
+      <form id="trackingForm" class="tracking-form">
+        <input 
+          type="text" 
+          id="eventName" 
+          class="tracking-input"
+          placeholder="Tracking Number" 
+          required
+        >
+        <button type="submit" class="track-btn">
+          Track Shipment <span class="search-icon">🔍</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
