@@ -254,68 +254,86 @@
       font-weight: bold;
     }
 
-    /* Mobile Responsive Styles */
+    /* Mobile Responsive Styles - Scale Down Only */
     @media (max-width: 768px) {
-      .container {
-        padding: 15px;
+      body {
+        font-size: 14px;
       }
 
-      .header {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px;
+      .tracking-header {
+        padding: 20px 15px;
       }
 
-      .header h1 {
+      .tracking-header h1 {
         font-size: 20px;
+      }
+
+      .tracking-number-display {
+        font-size: 1rem;
+        padding: 10px;
       }
 
       .shipment-card {
         padding: 20px 15px;
       }
 
-      .badge {
+      .status-badge {
         font-size: 11px;
-        padding: 6px 12px;
+        padding: 5px 12px;
       }
 
-      .info-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+      .info-item {
+        padding: 15px;
       }
 
-      .route-box {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
+      .info-label {
+        font-size: 0.75rem;
+      }
+
+      .info-value {
+        font-size: 0.95rem;
+      }
+
+      .location-icon {
+        font-size: 1.5rem;
       }
 
       .route-arrow {
-        transform: rotate(90deg);
-        font-size: 24px;
+        font-size: 1.5rem;
+        margin: 0 10px;
       }
 
-      .timeline {
-        padding-left: 15px;
+      h3 {
+        font-size: 16px;
       }
 
-      .timeline-item {
-        padding-left: 35px;
-      }
-
-      .timeline-dot {
-        width: 14px;
-        height: 14px;
-        left: -7px;
+      .timeline-time,
+      .timeline-status {
+        font-size: 0.8rem;
       }
 
       .back-btn {
         padding: 10px 20px;
-        font-size: 14px;
+        font-size: 13px;
       }
 
-      h2, h3 {
-        font-size: 18px;
+      footer {
+        padding: 30px 15px !important;
+      }
+
+      footer h3 {
+        font-size: 16px !important;
+      }
+
+      footer p,
+      footer li {
+        font-size: 13px;
+      }
+
+      footer input,
+      footer select,
+      footer button {
+        font-size: 13px;
       }
     }
   </style>
