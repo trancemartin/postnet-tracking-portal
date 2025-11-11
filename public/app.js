@@ -46,11 +46,20 @@ async function handleTrackEvent(e) {
     return;
   }
   
-  // Open tracking details in a new tab
-  window.open(`tracking-details.html?tracking=${encodeURIComponent(trackingNumber)}`, '_blank');
-  
-  // Optional: Also send to backend for logging
+  // Validate tracking number exists in the system
   try {
+    const response = await fetch(`/api/shipments/${encodeURIComponent(trackingNumber)}`);
+    const data = await response.json();
+    
+    if (!data.success || !data.shipment) {
+      showNotification('Invalid tracking number. Please check and try again.', 'error');
+      return;
+    }
+    
+    // Tracking number is valid, open details page
+    window.open(`tracking-details.html?tracking=${encodeURIComponent(trackingNumber)}`, '_blank');
+    
+    // Log the tracking event
     await fetch('/api/track', {
       method: 'POST',
       headers: {
@@ -62,12 +71,14 @@ async function handleTrackEvent(e) {
         timestamp: new Date().toISOString()
       })
     });
+    
+    // Clear the form
+    e.target.reset();
+    
   } catch (error) {
-    console.error('Failed to log tracking:', error);
+    console.error('Failed to validate tracking number:', error);
+    showNotification('Error validating tracking number. Please try again.', 'error');
   }
-  
-  // Clear the form
-  e.target.reset();
 }
 
 // Update UI with current data
@@ -159,3 +170,4 @@ window.addEventListener('load', () => {
   stats.pageViews++;
   updateStats();
 });
+
