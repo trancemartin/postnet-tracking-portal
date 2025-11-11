@@ -326,23 +326,31 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-section">
+  <div class="hero-section">
     <div class="hero-content">
-      <h1>Track Your Shipment</h1>
-      <p>Enter your tracking number to get the latest status of your shipment.</p>
-      <a href="#" class="contact-btn">Contact Us</a>
+      <h1>Postnet Shipment Tracker</h1>
+      <p>Track your PostNet shipment on every leg of its journey.</p>
+      <a href="#tracking" class="contact-btn">Contact Us</a>
     </div>
-  </section>
+  </div>
 
   <!-- Tracking Section -->
-  <div class="tracking-section">
+  <div class="tracking-section" id="tracking">
     <div class="tracking-content">
-      <h2>Track & Trace</h2>
-      <p class="instructions">Enter your tracking number below to track your parcel's progress.</p>
-      <form id="tracking-form" class="tracking-form">
-        <input type="text" id="tracking-number" class="tracking-input" placeholder="Enter Tracking Number (e.g., PN123456789)" required>
+      <h2>Track Your Postnet Shipment Now</h2>
+      <p class="instructions">
+        Please enter your PN or PP tracking number into the text box and click submit to track your shipment. Do not include any spaces.
+      </p>
+      <form id="trackingForm" class="tracking-form">
+        <input 
+          type="text" 
+          id="eventName" 
+          class="tracking-input"
+          placeholder="Tracking Number" 
+          required
+        >
         <button type="submit" class="track-btn">
-          <span class="search-icon">&#128269;</span> Track
+          Track Shipment <span class="search-icon">🔍</span>
         </button>
       </form>
     </div>
