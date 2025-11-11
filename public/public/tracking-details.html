@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipment Details</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+    }
+
+    .details-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .tracking-header {
+      text-align: center;
+      color: white;
+      background: #E30613;
+      margin-bottom: 30px;
+      padding: 40px 20px;
+    }
+
+    .tracking-number-display {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .shipment-card {
+      background: white;
+      border-radius: 0;
+      padding: 30px;
+      box-shadow: none;
+      margin-bottom: 20px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #E30613;
+    }
+
+    .info-label {
+      font-size: 0.875rem;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .info-value {
+      font-size: 1.1rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .route-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 30px 0;
+      position: relative;
+    }
+
+    .location-box {
+      flex: 1;
+      text-align: center;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .location-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .route-arrow {
+      font-size: 2rem;
+      color: #667eea;
+      margin: 0 20px;
+    }
+
+    .timeline {
+      margin-top: 30px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .timeline-dot {
+      width: 16px;
+      height: 16px;
+      background: #E30613;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .timeline-dot.completed {
+      background: #28a745;
+      animation: beep 1s ease-in-out infinite;
+    }
+
+    .timeline-dot.completed::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #28a745;
+      animation: pulse-ring 1s ease-out infinite;
+    }
+
+    .timeline-dot.active {
+      background: #28a745;
+      box-shadow: 0 0 10px #28a745, 0 0 20px #28a745, 0 0 30px #28a745;
+      animation: beep 1s ease-in-out infinite;
+      position: relative;
+    }
+
+    .timeline-dot.active::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #28a745;
+      animation: pulse-ring 1s ease-out infinite;
+    }
+
+    @keyframes beep {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px #28a745, 0 0 20px #28a745, 0 0 30px #28a745;
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px #28a745, 0 0 40px #28a745, 0 0 60px #28a745;
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes pulse-ring {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(2.5);
+        opacity: 0;
+      }
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-bottom: 20px;
+      border-left: 2px solid #e9ecef;
+      padding-left: 20px;
+      margin-left: 7px;
+    }
+
+    .timeline-item:last-child .timeline-content {
+      border-left: none;
+    }
+
+    .timeline-time {
+      font-size: 0.875rem;
+      color: #6c757d;
+      margin-bottom: 5px;
+    }
+
+    .timeline-status {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: #28a745;
+      color: white;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #E30613;
+      color: white;
+      text-decoration: none;
+      border-radius: 0;
+      font-weight: bold;
+      transition: background 0.2s ease;
+      border: none;
+    }
+
+    .back-btn:hover {
+      background: #c00510;
+      transform: none;
+      box-shadow: none;
+    }
+
+    h3 {
+      color: #E30613;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container details-container">
+    <div class="tracking-header">
+      <a href="index.html" class="back-btn">← Back to Tracking</a>
+      <h1>Shipment Details</h1>
+      <div class="tracking-number-display" id="trackingNumberDisplay"></div>
+    </div>
+
+    <div class="shipment-card">
+      <span class="status-badge" id="statusBadge">POSTNET EXPRESS TRACKING PORTAL</span>
+      
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">📦 Package Contents</div>
+          <div class="info-value" id="packageContents">Electronics</div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 20px; color: #E30613;">📍 Shipping Route</h3>
+      <div class="route-container">
+        <div class="location-box">
+          <div class="location-icon">📍</div>
+          <div class="info-label">Origin</div>
+          <div class="info-value" id="originLocation">New York, USA</div>
+        </div>
+        <div class="route-arrow">→</div>
+        <div class="location-box">
+          <div class="location-icon">🎯</div>
+          <div class="info-label">Destination</div>
+          <div class="info-value" id="destinationLocation">Los Angeles, USA</div>
+        </div>
+      </div>
+
+      <div class="info-grid" style="margin-top: 30px;">
+        <div class="info-item">
+          <div class="info-label">🚚 Transit Time</div>
+          <div class="info-value" id="transitTime">2-3 Business Days</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">📅 Estimated Arrival</div>
+          <div class="info-value" id="estimatedArrival">November 13, 2025</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 40px; margin-bottom: 20px; color: #E30613;">📋 Tracking History</h3>
+      <div class="timeline" id="trackingTimeline">
+        <div class="timeline-item">
+          <div class="timeline-dot active completed"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">November 10, 2025 - 2:30 PM</div>
+            <div class="timeline-status">In Transit - Chicago Hub</div>
+            <div style="color: #6c757d; font-size: 0.875rem;">Package is on the way to destination</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">November 10, 2025 - 8:00 AM</div>
+            <div class="timeline-status">Out for Delivery</div>
+            <div style="color: #6c757d; font-size: 0.875rem;">Package is out for delivery</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-time">November 9, 2025 - 3:15 PM</div>
+            <div class="timeline-status">Picked Up</div>
+            <div style="color: #6c757d; font-size: 0.875rem;">Package picked up by receiver</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: #E30613; color: white; padding: 40px 20px; margin-top: 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+      
+      <!-- HEAD OFFICE -->
+      <div>
+        <h3 style="color: white; margin-bottom: 20px; font-size: 18px;">HEAD OFFICE</h3>
+        <p style="margin-bottom: 10px;"><strong>CALL CENTRE: 0860 767 8638</strong></p>
+        <p style="margin-top: 20px;"><strong>ADDRESS</strong></p>
+        <p style="line-height: 1.6;">
+          92 Augrabies Road<br>
+          Waterfall Office Park<br>
+          Bekker Road<br>
+          Midrand<br>
+          1685
+        </p>
+      </div>
+
+      <!-- SERVICES -->
+      <div>
+        <h3 style="color: white; margin-bottom: 20px; font-size: 18px;">SERVICES</h3>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+          <li>• Copy and Print</li>
+          <li>• Courier</li>
+          <li>• Stationery</li>
+          <li>• Digital</li>
+          <li>• Mailboxes</li>
+        </ul>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div>
+        <h3 style="color: white; margin-bottom: 20px; font-size: 18px;">QUICK LINKS</h3>
+        <ul style="list-style: none; padding: 0; line-height: 2;">
+          <li><a href="index.html" style="color: white; text-decoration: none;">• Home</a></li>
+          <li><a href="#" style="color: white; text-decoration: none;">• Shipment Tracker</a></li>
+          <li><a href="#" style="color: white; text-decoration: none;">• Store Locator</a></li>
+          <li><a href="#" style="color: white; text-decoration: none;">• Own A PostNet</a></li>
+          <li><a href="#" style="color: white; text-decoration: none;">• Contact PostNet</a></li>
+        </ul>
+      </div>
+
+      <!-- SUBSCRIBE TO NEWSLETTER -->
+      <div>
+        <h3 style="color: white; margin-bottom: 20px; font-size: 18px;">SUBSCRIBE TO NEWSLETTER</h3>
+        <input type="email" placeholder="Email Address" style="width: 100%; padding: 10px; margin-bottom: 10px; border: none;">
+        <select style="width: 100%; padding: 10px; margin-bottom: 10px; border: none;">
+          <option>Select Store...</option>
+        </select>
+        <button style="background: #007bff; color: white; padding: 10px 20px; border: none; cursor: pointer; font-weight: bold;">Sign Up Now</button>
+        <p style="font-size: 12px; margin-top: 20px; line-height: 1.5;">
+          This site is protected by reCAPTCHA and the Google 
+          <a href="#" style="color: #66ccff;">Privacy Policy</a> and 
+          <a href="#" style="color: #66ccff;">Terms of Service</a> apply.
+        </p>
+        <p style="font-size: 12px; margin-top: 20px;">© PostNet Southern Africa 2025</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="tracking-details.js?v=8"></script>
+</body>
+</html>
