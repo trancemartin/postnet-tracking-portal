@@ -17,7 +17,8 @@ let statsData = {
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../public')));
+// **FIXED LINE** - Use a more reliable path to the public folder
+app.use(express.static(path.join(process.cwd(), 'public')));
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -41,6 +42,7 @@ app.post('/api/track', (req, res) => {
   try {
     const { name, category, value, timestamp } = req.body;
     
+    // Validate required fields
     if (!name || !category) {
       return res.status(400).json({
         success: false,
@@ -48,6 +50,7 @@ app.post('/api/track', (req, res) => {
       });
     }
     
+    // Create event object
     const event = {
       id: Date.now().toString(),
       name,
@@ -56,12 +59,15 @@ app.post('/api/track', (req, res) => {
       timestamp: timestamp || new Date().toISOString()
     };
     
+    // Store event
     eventsData.unshift(event);
     
+    // Keep only last 100 events
     if (eventsData.length > 100) {
       eventsData = eventsData.slice(0, 100);
     }
     
+    // Update stats
     statsData.totalEvents++;
     if (category === 'page') {
       statsData.pageViews++;
@@ -90,6 +96,8 @@ app.get('/api/stats', (req, res) => {
     stats: statsData
   });
 });
+
+// Shipment management endpoints
 
 // Get all shipments
 app.get('/api/shipments', (req, res) => {
@@ -238,9 +246,9 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Serve index.html for root path
+// **FIXED BLOCK** - Use a more reliable path to index.html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
 });
 
 // 404 handler
